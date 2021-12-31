@@ -8,9 +8,16 @@ package com.luhan.entity;
  * @date 2017年4月9日 上午10:44:27
  */
 public class HttpParam {
-    //参数的键
+
+    /**
+     * 参数的键
+     */
     private String key;
-    //参数的对应键的值
+
+    /**
+     * 参数的对应键的值
+     *
+     */
     private String value;
 
     /**

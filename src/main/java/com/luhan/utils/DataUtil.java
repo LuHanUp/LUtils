@@ -1,7 +1,5 @@
 package com.luhan.utils;
 
-import com.luhan.enums.ObjType;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -702,5 +700,14 @@ public class DataUtil {
             return Integer.parseInt(matcher.group(0));
         }
         return 0;
+    }
+
+    public enum ObjType {
+        S,
+        I,
+        B,
+        O,
+        C,
+        D
     }
 }
