@@ -20,7 +20,7 @@ public class DateUtil {
     /**
      * yyyy-MM-dd
      */
-    public static final String DATE_FORMATTIME = "yyyy-MM-dd";
+    public static final String DATE_FORMAT_TIME = "yyyy-MM-dd";
 
 
     /**
@@ -44,8 +44,8 @@ public class DateUtil {
      * @return 返回转换成功之后的字符串
      * @throws IllegalArgumentException 会抛出null和""异常
      */
-    public static String formDate(String dateFormat, String tolerant) throws IllegalArgumentException {
-        if (dateFormat == null || dateFormat.equalsIgnoreCase("")) {
+    public static String formDate(String dateFormat, String tolerant) {
+        if (dateFormat == null || "".equalsIgnoreCase(dateFormat)) {
             dateFormat = tolerant;
         }
 
@@ -71,8 +71,7 @@ public class DateUtil {
         // 需要转化为什么类型
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         // 将参数时间戳进行转换
-        String time = format.format(timesStamp);
-        return time;
+        return format.format(timesStamp);
     }
 
     /**
