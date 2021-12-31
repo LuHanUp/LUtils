@@ -1,5 +1,6 @@
 package com.luhan.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +21,9 @@ public class ArrayOperate {
      * @return
      */
     public static <T> List<T> union(List<T> list1, List<T> list2) {
-        list1.addAll(list2);
-        return list1;
+        List<T> localList1 = new ArrayList<>(list1);
+        localList1.addAll(new ArrayList<>(list2));
+        return localList1;
     }
 
     /**
@@ -32,8 +34,9 @@ public class ArrayOperate {
      * @return
      */
     public static <T> List<T> intersection(List<T> list1, List<T> list2) {
-        list1.retainAll(list2);
-        return list1;
+        List<T> localList1 = new ArrayList<>(list1);
+        localList1.retainAll(list2);
+        return localList1;
     }
 
     /**
@@ -44,7 +47,8 @@ public class ArrayOperate {
      * @return
      */
     public static <T> List<T> difference(List<T> list1, List<T> list2) {
-        list1.removeAll(list2);
-        return list1;
+        List<T> localList1 = new ArrayList<>(list1);
+        localList1.removeAll(list2);
+        return localList1;
     }
 }
