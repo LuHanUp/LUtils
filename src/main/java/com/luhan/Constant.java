@@ -14,16 +14,6 @@ public class Constant {
     public static final int DATA_SIZE = 10;
 
     /**
-     * 设置日期格式的常量 yyyy-MM-dd HH:mm:ss
-     */
-    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
-    /**
-     * 设置日期格式的常量 yyyy-MM-dd
-     */
-    public static final String DATE_FORMATTIME = "yyyy-MM-dd";
-
-    /**
      * UTF-8
      */
     public static final String ENCODING_UTF8 = "UTF-8";

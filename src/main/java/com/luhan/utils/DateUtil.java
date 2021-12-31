@@ -1,7 +1,5 @@
 package com.luhan.utils;
 
-import com.luhan.Constant;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,8 +11,16 @@ import java.util.Date;
  * @date 2017年3月18日 下午4:39:44
  */
 public class DateUtil {
-    //设置静态的SimpleDateFormat对象
-    private static SimpleDateFormat format;
+
+    /**
+     * yyyy-MM-dd HH:mm:ss
+     */
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * yyyy-MM-dd
+     */
+    public static final String DATE_FORMATTIME = "yyyy-MM-dd";
 
 
     /**
@@ -23,10 +29,10 @@ public class DateUtil {
      * @return 转换完成后的日期格式，字符串类型的
      */
     public static String formDate() {
-        //获得系统当前时间
+        // 获得系统当前时间
         Date date = new Date(System.currentTimeMillis());
-        //获取format对象，并设置format对象要转化日期的格式
-        format = new SimpleDateFormat(Constant.DATE_FORMAT);
+        // 获取format对象，并设置format对象要转化日期的格式
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         return format.format(date);
     }
 
@@ -47,10 +53,10 @@ public class DateUtil {
             throw new IllegalArgumentException("格式不能为空");
         }
 
-        //获得系统当前时间
+        // 获得系统当前时间
         Date date = new Date(System.currentTimeMillis());
-        //获取format对象，并设置format对象要转化日期的格式
-        format = new SimpleDateFormat(dateFormat);
+        // 获取format对象，并设置format对象要转化日期的格式
+        SimpleDateFormat format = new SimpleDateFormat(dateFormat);
 
         return format.format(date);
     }
@@ -62,9 +68,9 @@ public class DateUtil {
      * @return 转化之后的日期，格式为String
      */
     public static String timesStampToDate(Long timesStamp) {
-        //需要转化为什么类型
-        format = new SimpleDateFormat(Constant.DATE_FORMAT);
-        //将参数时间戳进行转换
+        // 需要转化为什么类型
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
+        // 将参数时间戳进行转换
         String time = format.format(timesStamp);
         return time;
     }
@@ -77,7 +83,7 @@ public class DateUtil {
      * @throws ParseException 可能会抛出传入的不是正确格式的日期
      */
     public static Long dateToTimestamp(String date) throws ParseException {
-        format = new SimpleDateFormat(Constant.DATE_FORMAT);
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         Date d = format.parse(date);
         return d.getTime() / 1000;
     }
@@ -92,7 +98,7 @@ public class DateUtil {
      * @author luhan
      */
     public static Long dateToTimestamp(String date, String dataFormat) throws ParseException {
-        format = new SimpleDateFormat(dataFormat);
+        SimpleDateFormat format = new SimpleDateFormat(dataFormat);
         Date d = format.parse(date);
         return d.getTime() / 1000;
     }
