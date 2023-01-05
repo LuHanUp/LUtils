@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -700,6 +701,50 @@ public class DataUtil {
             return Integer.parseInt(matcher.group(0));
         }
         return 0;
+    }
+
+    /**
+     * 判断List集合是否为空
+     *
+     * @param list list集合
+     * @param <E>
+     * @return true-list是空集合 false-list不是空集合
+     */
+    public static <E> boolean isEmpty(List<E> list) {
+        return null == list || list.size() == 0;
+    }
+
+    /**
+     * 判断List集合是否不为空
+     *
+     * @param list list集合
+     * @param <E>
+     * @return true-list不是空集合 false-list是空集合
+     */
+    public static <E> boolean isNotEmpty(List<E> list) {
+        return !isEmpty(list);
+    }
+
+    /**
+     * 获取多个List集合的交集
+     *
+     * @param lists List集合列表
+     * @param <E>   List中的元素泛型
+     * @return 多个List集合的交集，如果其中一个List为空，那么就返回空集合
+     */
+    public static <E> List<E> intersection(List<E>... lists) {
+        if (lists == null || lists.length == 0) return Collections.emptyList();
+
+        for (List<E> list : lists) {
+            if (isEmpty(list)) return Collections.emptyList();
+        }
+
+        // 直接挨个去交集即可
+        List<E> intersectionList = new ArrayList<>(lists[0]);
+        for (List<E> list : lists) {
+            intersectionList.retainAll(list);
+        }
+        return intersectionList;
     }
 
     public enum ObjType {
