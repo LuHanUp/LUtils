@@ -766,8 +766,6 @@ public class DataUtil {
     /**
      * 根据一个List的顺序对另一个List进行排序
      * 【会改变原List数据】
-     * <p>
-     * tips:当<em>orderList.size()</em>&lt;<em>sourceList.size()</em>会存在问题
      *
      * @param sourceList  需要排序的List
      * @param orderList   顺序参考的List
@@ -782,6 +780,22 @@ public class DataUtil {
         List<R> sortList = new ArrayList<>(orderList);
         if (orderList.size() < sourceList.size()) {
             // 当排序list数量小于原始List时需要进行特殊处理,将不存在于排序list中的元素追加进orderList中
+            // 主要为了解决当orderList条数小于sourceList条数时出现排序问题
+            /*
+                问题示例如下：
+                sourceList:[2,1,5,7,3,6,8]
+                orderList:[2,6,8]
+                排序后的sourceList:[1,5,7,3,2,6,8]
+                会发现不存在于orderList中的元素都排在前面了，实际是希望将orderList中的元素排在最前面
+                正确结果应该是:[2,6,8,1,5,7,3]
+             */
+            /*
+                修复原理：就是补齐orderList而已,将未出现在orderList中的元素追加到orderList中
+                sourceList:[2,1,5,7,3,6,8]
+                orderList:[2,6,8]
+                补齐后的orderList:[2,6,8,1,5,7,3]
+                再进行按照orderList排序，那么就会是正确的排序
+             */
             List<R> itemList = sourceList.stream().map(orderColumn).collect(Collectors.toList());
             sortList.addAll(itemList);
             sortList = sortList.stream().distinct().collect(Collectors.toList());
