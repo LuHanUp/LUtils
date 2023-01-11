@@ -49,6 +49,7 @@ public class DataUtilsTest {
 
     @Test
     public void testSortByList() {
+        System.out.println("=========================测试Bean类型==================================");
         List<TestDatePagingEntity> sourceList = new ArrayList<>();
         sourceList.add(new TestDatePagingEntity("name1", "男", 12));
         sourceList.add(new TestDatePagingEntity("name3", "男", 30));
@@ -65,5 +66,23 @@ public class DataUtilsTest {
         DataUtil.sortByList(sourceList, sortList, TestDatePagingEntity::getAge);
 
         System.out.println("排序后数据:" + sourceList);
+
+        System.out.println("=========================测试基础类型==================================");
+
+        List<Integer> sourceList2 = new ArrayList<>();
+        sourceList2.add(12);
+        sourceList2.add(30);
+        sourceList2.add(43);
+        sourceList2.add(56);
+        sourceList2.add(18);
+        sourceList2.add(22);
+
+        List<Integer> sortList2 = Arrays.asList(22, 30, 56);
+
+        System.out.println("排序前数据:" + sourceList2);
+        System.out.println("排序规则数据：" + sortList2);
+
+        DataUtil.sortByList(sourceList2, sortList2);
+        System.out.println("排序后数据:" + sourceList2);
     }
 }
