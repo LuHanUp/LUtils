@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -745,6 +746,40 @@ public class DataUtil {
             intersectionList.retainAll(list);
         }
         return intersectionList;
+    }
+
+    /**
+     * 根据一个List的顺序对另一个List进行排序
+     * 【会改变原List数据】
+     * <p>
+     * tips:当<em>orderList.size()</em>&lt;<em>sourceList.size()</em>会存在问题
+     *
+     * @param sourceList 需要排序的List
+     * @param orderList  顺序参考的List
+     * @param <E>
+     */
+    public static <E> void sortByList(List<E> sourceList, List<E> orderList) {
+        sortByList(sourceList, orderList, Function.identity());
+    }
+
+    /**
+     * 根据一个List的顺序对另一个List进行排序
+     * 【会改变原List数据】
+     * <p>
+     * tips:当<em>orderList.size()</em>&lt;<em>sourceList.size()</em>会存在问题
+     *
+     * @param sourceList  需要排序的List
+     * @param orderList   顺序参考的List
+     * @param orderColumn 排序字段
+     * @param <E>
+     * @param <R>
+     */
+    public static <E, R> void sortByList(List<E> sourceList, List<R> orderList, Function<E, R> orderColumn) {
+        sourceList.sort(((o1, o2) -> {
+            int o1Index = orderList.indexOf(orderColumn.apply(o1));
+            int o2Index = orderList.indexOf(orderColumn.apply(o2));
+            return o1Index - o2Index;
+        }));
     }
 
     public enum ObjType {

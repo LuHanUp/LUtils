@@ -1,7 +1,9 @@
 import com.luhan.utils.DataUtil;
+import entity.TestDatePagingEntity;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -43,5 +45,25 @@ public class DataUtilsTest {
         list4.add(4);
         list4.add(2);
         System.out.println("lists取交集:" + DataUtil.intersection(list1, list2, list3, list4));
+    }
+
+    @Test
+    public void testSortByList() {
+        List<TestDatePagingEntity> sourceList = new ArrayList<>();
+        sourceList.add(new TestDatePagingEntity("name1", "男", 12));
+        sourceList.add(new TestDatePagingEntity("name3", "男", 30));
+        sourceList.add(new TestDatePagingEntity("name2", "男", 43));
+        sourceList.add(new TestDatePagingEntity("name4", "男", 56));
+        sourceList.add(new TestDatePagingEntity("name5", "男", 18));
+        sourceList.add(new TestDatePagingEntity("name6", "男", 22));
+
+        List<Integer> sortList = Arrays.asList(22, 18, 56);
+
+        System.out.println("排序前数据:" + sourceList);
+        System.out.println("排序规则数据：" + sortList);
+
+        DataUtil.sortByList(sourceList, sortList, TestDatePagingEntity::getAge);
+
+        System.out.println("排序后数据:" + sourceList);
     }
 }
