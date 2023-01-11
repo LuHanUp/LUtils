@@ -753,7 +753,6 @@ public class DataUtil {
      * 根据一个List的顺序对另一个List进行排序
      * 【会改变原List数据】
      * <p>
-     * tips:当<em>orderList.size()</em>&lt;<em>sourceList.size()</em>会存在问题
      *
      * @param sourceList 需要排序的List
      * @param orderList  顺序参考的List
