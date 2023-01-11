@@ -57,7 +57,7 @@ public class DataUtilsTest {
         sourceList.add(new TestDatePagingEntity("name5", "男", 18));
         sourceList.add(new TestDatePagingEntity("name6", "男", 22));
 
-        List<Integer> sortList = Arrays.asList(22, 18, 56);
+        List<Integer> sortList = Arrays.asList(22, 30, 56);
 
         System.out.println("排序前数据:" + sourceList);
         System.out.println("排序规则数据：" + sortList);

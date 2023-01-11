@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author Luhan
@@ -775,9 +776,20 @@ public class DataUtil {
      * @param <R>
      */
     public static <E, R> void sortByList(List<E> sourceList, List<R> orderList, Function<E, R> orderColumn) {
+        if (isEmpty(sourceList) || isEmpty(orderList)) return;
+
+        // 避免破坏orderList
+        List<R> sortList = new ArrayList<>(orderList);
+        if (orderList.size() < sourceList.size()) {
+            // 当排序list数量小于原始List时需要进行特殊处理,将不存在于排序list中的元素追加进orderList中
+            List<R> itemList = sourceList.stream().map(orderColumn).collect(Collectors.toList());
+            sortList.addAll(itemList);
+            sortList = sortList.stream().distinct().collect(Collectors.toList());
+        }
+        List<R> finalSortList = sortList;
         sourceList.sort(((o1, o2) -> {
-            int o1Index = orderList.indexOf(orderColumn.apply(o1));
-            int o2Index = orderList.indexOf(orderColumn.apply(o2));
+            int o1Index = finalSortList.indexOf(orderColumn.apply(o1));
+            int o2Index = finalSortList.indexOf(orderColumn.apply(o2));
             return o1Index - o2Index;
         }));
     }
